@@ -1,0 +1,23 @@
+version: "3.3"
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: db-for-go
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --sql-mode=ONLY_FULL_GROUP_BY,NO_ENGINE_SUBSTITUTION
+    environment:
+      MYSQL_ROOT_USER: root # MySQL のルートユーザー名 (本来は.envとかで管理すべき)
+      MYSQL_ROOT_PASSWORD: root_pass # MySQL のルートパスワード (本来は.envとかで管理すべき)
+      MYSQL_DATABASE: test-db # 作成する初期データベース名 (本来は.envとかで管理すべき)
+      MYSQL_USER: hoge # 通常ユーザー名 (本来は.envとかで管理すべき)
+      MYSQL_PASSWORD: hoge_pass # 通常ユーザーパスワード (本来は.envとかで管理すべき)
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-volume:/var/lib/mysql
+
+volumes:
+  db-volume:

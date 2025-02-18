@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "internal/pb";
+
+// ユーザー情報の定義
+message User {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// ユーザー取得リクエスト
+message GetUserRequest {
+  int64 id = 1;
+}
+
+// ユーザー取得レスポンス
+message GetUserResponse {
+  User user = 1;
+}
+
+// gRPC サービス定義
+service UserService {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
